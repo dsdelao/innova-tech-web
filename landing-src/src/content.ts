@@ -256,7 +256,7 @@ export const landingProps: InkOrbitSaasTemplateProps = {
 
   /* --------------------------------------------------------------- apariencia */
   accent: "#22D3EE", // --cyan real del sitio
-  defaultTheme: "dark",
+  defaultTheme: "light",
   sculptureSeed: 4211,
   fonts: {
     sans: "'Space Grotesk', 'Inter', system-ui, sans-serif", // --font-display + --font-body reales

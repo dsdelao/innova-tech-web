@@ -1580,7 +1580,7 @@ export default function InkOrbitSaasTemplate({
   onWatchDemo,
   accent = "#22D3EE",
   fonts,
-  defaultTheme = "dark",
+  defaultTheme = "light",
   onThemeChange,
   maxWidth = "1180px",
   height = "100svh",
