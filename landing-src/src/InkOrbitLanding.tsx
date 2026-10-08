@@ -318,79 +318,95 @@ function project(x: number, y: number, z: number, yaw: number, pitch: number, f:
 /* --------------------------------------------------------------- defaults */
 
 const CONTACT_URL = "https://innova-tech.com.mx/contacto.html"
+const SITE_URL = "https://innova-tech.com.mx"
 
+// Nav literal del sitio (navbar/footer de index.html). Sin "Inicio": el sitio
+// no lo tiene y la sección home ya está cubierta por el logo.
 const D_NAV: InkNavLink[] = [
-  { label: "Inicio", target: "home" },
-  { label: "Funciones", target: "features" },
-  { label: "Nosotros", target: "about" },
-  { label: "Contacto", target: CONTACT_URL },
+  { label: "Cómo trabajamos", target: "about" },
+  { label: "Servicios", target: "features" },
+  { label: "Casos reales", target: SITE_URL + "/#expediciones" },
+  { label: "Proyectos", target: SITE_URL + "/#laboratorio" },
+  { label: "Capacitaciones", target: SITE_URL + "/capacitaciones.html" },
+  { label: "Cursos Online", target: SITE_URL + "/cursos.html" },
 ]
+// Defaults: contenido literal del sitio Innova-Tech (/tmp/landing-content.md).
+// La plantilla NO arrastra copy propio de SaaS: cifras, precios, descuentos,
+// SLA, tiempos de configuración y testimonios están prohibidos. Los arrays
+// sin datos verificables se dejan vacíos (about.stats, faq, footerColumns).
 const D_HERO: InkHero = {
-  titleTop: "Construye más rápido con",
-  titleAccent: ["Automatización inteligente", "Flujos de trabajo adaptativos", "Agentes autónomos"],
+  titleTop: "De la tecnología emergente a su ventaja operativa",
+  titleAccent: ["Inteligencia Artificial Privada", "Ciberseguridad de Defensa", "Infraestructura Crítica"],
   description:
-    "Innova-Tech te ayuda a automatizar flujos de trabajo, generar información accionable y escalar tu productividad con inteligencia de última generación.",
-  primaryCta: "Comenzar prueba gratuita",
-  secondaryCta: "Ver demostración",
+    "La convertimos en sistemas que operan todos los días. Construimos, desplegamos y damos mantenimiento.",
+  primaryCta: "Agendar diagnóstico",
+  secondaryCta: "Ver cómo trabajamos",
   sculptureHint: "Arrastra para girar · Haz clic para recrear",
 }
 const D_FEATURES: InkFeatures = {
-  tag: "Funciones",
-  title: "Automatización *inteligente* de\nflujos de trabajo",
+  tag: "Servicios",
+  title: "Sistemas que operan\n*todos los días.*",
+  // DOM-01 // IA
   collaboration: {
-    title: "Colaboración en tiempo real",
-    description: "Trabajen juntos en tiempo real, compartan avances, den seguimiento a los cambios y manténganse alineados sin cambiar de herramienta.",
+    title: "Inteligencia Artificial Privada",
+    description:
+      "IA desplegada dentro de su perímetro: sus datos no salen de sus servidores. Modelos, agentes y automatización con control total.",
   },
+  // DOM-02 // DEFENSA
   reports: {
-    title: "Informes generados automáticamente",
-    description: "Obtén informes limpios y estructurados a partir de tus datos, sin plantillas, redacción manual ni ediciones.",
+    title: "Ciberseguridad de Defensa",
+    description:
+      "Protección en profundidad, monitoreo permanente y respuesta ante incidentes. Su información es el activo que blindamos.",
   },
+  // DOM-04 // AUTOMATIZACIÓN
   integrations: {
-    title: "Centro de integraciones",
-    description: "Conecta todas tus herramientas — Slack, Google Workspace, CRMs, bases de datos — en un solo sistema unificado de IA.",
-    tools: ["Sheets", "Drive", "Docs", "Search"],
+    title: "Software y Automatización",
+    description:
+      "Herramientas a la medida que convierten procesos manuales en sistemas que trabajan mientras usted duerme.",
+    tools: ["Open WebUI", "Arch-Credential", "FerrePOS", "Jarvis"],
   },
+  // DOM-03 // INFRAESTRUCTURA
   insights: {
-    title: "Análisis predictivo",
-    description: "La IA analiza tus datos y entrega predicciones en tiempo real sobre las que puedes actuar de inmediato.",
-    values: [22, 26, 24, 31, 29, 36, 34, 41, 39, 47, 52, 58],
+    title: "Infraestructura Crítica",
+    description:
+      "Redes, servidores y plataformas de alta disponibilidad diseñadas para mantenerse en pie cuando todo depende de ellas.",
+    // DECORATIVO: serie neutra para la gráfica, no es un dato real.
+    values: [24, 28, 26, 33, 31, 38, 36, 42, 40, 47, 51, 56],
     forecastFrom: 8,
   },
 }
 const D_ABOUT: InkAbout = {
-  tag: "Nosotros",
-  title: "Construido por personas que\n*odian el trabajo repetitivo.*",
+  tag: "Cómo trabajamos",
+  title: "Convertimos promesa en\n*operación.*",
   body:
-    "Innova-Tech empezó como una herramienta interna: pasábamos más tiempo moviendo datos entre pestañas que pensando en ellos. Hoy ese mismo motor ejecuta en silencio las partes repetitivas del trabajo de muchos equipos, para que las personas vuelvan a lo que solo una persona puede hacer.",
-  stats: [
-    { value: "12,400+", label: "Equipos incorporados" },
-    { value: "38M", label: "Tareas automatizadas" },
-    { value: "99.98%", label: "Disponibilidad, últimos 12 meses" },
-    { value: "4.9/5", label: "Calificación promedio" },
-  ],
+    "Exploramos antes que el mercado: Evaluamos tecnologías emergentes con rigor metodológico y científico, no con entusiasmo de marketing. Probamos bajo presión: Cada solución se valida en los entornos más exigentes: alta seguridad, misión crítica, cero margen de error. Convertimos promesa en operación: Lo que otros llaman proyecto de innovación, nosotros lo entregamos como servicio garantizado y documentado.",
+  // Vacío: no hay cifras verificadas más allá de 1998/15 (viven en content.ts).
+  stats: [],
 }
-const D_FAQ: InkFaq[] = [
-  { question: "¿Cuánto tarda la configuración?", answer: "La mayoría de los equipos conecta sus primeras herramientas y publica un flujo de trabajo funcional en menos de quince minutos. Las plantillas cubren los casos más comunes desde el primer momento." },
-  { question: "¿Se usan mis datos para entrenar modelos?", answer: "No. Tus datos permanecen en tu espacio de trabajo, se cifran en reposo y en tránsito, y nunca se usan para entrenar modelos compartidos." },
-  { question: "¿Puedo cambiar de plan después?", answer: "Cuando quieras. Los cambios se aplican al instante y las reducciones al final de tu periodo de facturación; el tiempo no utilizado se acredita automáticamente." },
-  { question: "¿Ofrecen descuentos para startups y organizaciones sin fines de lucro?", answer: "Sí: los equipos elegibles obtienen 50% de descuento en Pro el primer año. Escríbenos desde la página de contacto y menciona tu organización." },
-]
+// Vacío: sin FAQ de plantilla (la FAQ real vive en content.ts).
+const D_FAQ: InkFaq[] = []
 const D_CTA: InkCta = {
-  title: "¿Listo para *construir más rápido?*",
-  description: "Cuéntanos qué quieres automatizar y te respondemos el mismo día.",
-  button: "Contáctanos",
+  title: "¿Listo para *cruzar la frontera?*",
+  description:
+    "El primer paso es una conversación. Agende una consulta estratégica sin costo y permítanos entender su desafío.",
+  button: "Contacto",
 }
-const D_FOOTER: InkFooterColumn[] = [
-  { title: "Producto", links: [{ label: "Funciones", href: "#" }, { label: "Integraciones", href: "#" }, { label: "Novedades", href: "#" }] },
-  { title: "Empresa", links: [{ label: "Nosotros", href: "#" }, { label: "Empleo", href: "#" }, { label: "Blog", href: "#" }, { label: "Contacto", href: CONTACT_URL }] },
-  { title: "Legal", links: [{ label: "Privacidad", href: "#" }, { label: "Términos", href: "#" }, { label: "Seguridad", href: "#" }] },
-]
+// Pasos del diálogo: fases derivadas del manifiesto real (mismos textos que
+// content.ts). La plantilla no trae fases propias con cifras ni tiempos.
 const D_STEPS: InkDemoStep[] = [
-  { label: "Ingesta", detail: "Extrayendo 2,184 filas de Sheets, CRM y bandeja de soporte" },
-  { label: "Clasificar", detail: "Etiquetando intenciones y asignándolas a los responsables adecuados" },
-  { label: "Predecir", detail: "Calculando el riesgo de fuga de la próxima semana en 312 cuentas" },
-  { label: "Informe", detail: "Redactando el informe semanal de operaciones con gráficos y destacados" },
-  { label: "Notificar", detail: "Publicando el resumen en #ops y enviándolo por correo a 6 responsables" },
+  {
+    label: "Exploramos",
+    detail: "Evaluamos tecnologías emergentes con rigor metodológico y científico, no con entusiasmo de marketing.",
+  },
+  {
+    label: "Probamos",
+    detail: "Cada solución se valida en los entornos más exigentes: alta seguridad, misión crítica, cero margen de error.",
+  },
+  { label: "Desplegamos", detail: "Construimos, desplegamos y damos mantenimiento." },
+  {
+    label: "Convertimos",
+    detail: "Lo que otros llaman proyecto de innovación, nosotros lo entregamos como servicio garantizado y documentado.",
+  },
 ]
 
 /* ------------------------------------------------------------------ styles */
@@ -539,6 +555,8 @@ const NF_CSS = `
 .nf-stat:hover{background:var(--nf-card)}
 .nf-stat-v{font-size:clamp(26px,3.2cqw,34px);font-weight:500;letter-spacing:-.035em;line-height:1.1;font-variant-numeric:tabular-nums;font-family:var(--nf-display)}
 .nf-stat-l{font-size:12px;color:var(--nf-muted);margin-top:4px}
+.nf-stat-n{display:inline-block}
+.nf-stat-n-in{animation:nf-stat-in .7s cubic-bezier(.2,.7,.2,1) both}
 .nf-faq{border-top:1px solid var(--nf-line)}
 .nf-faq-item{border-bottom:1px solid var(--nf-line)}
 .nf-faq-q{display:flex;width:100%;align-items:center;justify-content:space-between;gap:16px;padding:18px 2px;font-size:15px;font-weight:500;letter-spacing:-.01em}
@@ -592,6 +610,7 @@ const NF_CSS = `
 .nf-dialog-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;font-size:12.5px;color:var(--nf-muted)}
 
 @keyframes nf-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes nf-stat-in{from{opacity:0;transform:translateY(.35em)}to{opacity:1;transform:none}}
 @keyframes nf-fade{from{opacity:0}to{opacity:1}}
 @keyframes nf-blur-in{from{opacity:0;filter:blur(8px);transform:translateY(10px)}to{opacity:1;filter:blur(0);transform:none}}
 @keyframes nf-blur-out{from{opacity:1;filter:blur(0)}to{opacity:0;filter:blur(8px);transform:translateY(-8px)}}
@@ -606,6 +625,14 @@ const NF_CSS = `
 @media (prefers-reduced-motion:reduce){
 .nf-root *,.nf-modal *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
 .nf-reveal{opacity:1;transform:none}
+}
+/* Sin JS nadie cambia data-in a "true": el reveal se quedaria en opacity:0 y
+   la linea de la grafica en stroke-dashoffset:1 (contenido invisible para los
+   navegadores sin script). El <noscript> de index.html cubre el parser; esta
+   media query cubre los navegadores donde la ejecucion esta desactivada. */
+@media (scripting: none){
+.nf-reveal{opacity:1;transform:none}
+.nf-line-draw{stroke-dashoffset:0}
 }
 `
 
@@ -1389,6 +1416,9 @@ function IntegrationsCard({ copy, reduced }: { copy: InkFeatures["integrations"]
 }
 
 function InsightsCard({ copy, uid, reduced }: { copy: InkFeatures["insights"]; uid: string; reduced: boolean }) {
+  // Sin badge de delta: `copy.values` es una serie DECORATIVA (ver content.ts),
+  // no un dato real de Innova-Tech, y de ella salía un "+N%" inventado en
+  // pantalla. La gráfica solo conserva su forma y la marca "PRONÓSTICO".
   const [ref, inView] = useInView(0.3)
   const [hover, setHover] = React.useState(-1)
   const W = 300
@@ -1400,7 +1430,6 @@ function InsightsCard({ copy, uid, reduced }: { copy: InkFeatures["insights"]; u
   const last = points[points.length - 1]
   const i = hover >= 0 ? hover : points.length - 1
   const p = points[i]
-  const pct = Math.round(((vals[i] - vals[0]) / (vals[0] || 1)) * 100)
   const onMove = (e: React.PointerEvent<SVGSVGElement>) => {
     const r = e.currentTarget.getBoundingClientRect()
     setHover(nearestIndex(points.map((q) => q[0]), ((e.clientX - r.left) / r.width) * W))
@@ -1428,12 +1457,6 @@ function InsightsCard({ copy, uid, reduced }: { copy: InkFeatures["insights"]; u
           {hover >= 0 && <line x1={p[0]} x2={p[0]} y1="8" y2={H - 14} stroke="var(--nf-ink)" strokeOpacity=".35" />}
           {!reduced && hover < 0 && <circle cx={last[0]} cy={last[1]} r="7" fill="var(--nf-ink)" opacity=".15" className="nf-glow" />}
           <circle cx={p[0]} cy={p[1]} r="3.2" fill="var(--nf-raise)" stroke="var(--nf-ink)" strokeWidth="1.5" />
-          <g transform={"translate(" + clamp(p[0], 40, W - 40) + "," + (p[1] < 34 ? p[1] + 22 : p[1] - 12) + ")"}>
-            <rect x="-30" y="-11" width="60" height="15" rx="2" fill="var(--nf-inv)" />
-            <text x="0" y="-1" textAnchor="middle" fontSize="7.5" fill="var(--nf-inv-ink)" fontFamily="var(--nf-mono)">
-              {(i >= split ? "pron " : "sem " + (i + 1) + " ") + (pct >= 0 ? "+" : "") + pct + "%"}
-            </text>
-          </g>
         </svg>
         <div style={{ marginTop: "auto" }}>
           <h3>{copy.title}</h3>
@@ -1444,25 +1467,17 @@ function InsightsCard({ copy, uid, reduced }: { copy: InkFeatures["insights"]; u
   )
 }
 
+// El stat dice SIEMPRE el valor final: `renderToString` escribe exactamente
+// este string en landing/index.html, markup que leen los crawlers y ve un
+// navegador sin JS. El count-up anterior arrancaba en t=0, así que ese HTML
+// prerenderizado decía "Operando desde 0" / "Sistemas en producción 0" y, con
+// JS, la cifra volvía a 0 al entrar en viewport (flash de contenido falso).
+// La cifra ya no cambia nunca: lo único que se anima al entrar en pantalla es
+// la presentación del valor (opacity/translate), y con prefers-reduced-motion
+// ni eso.
 function StatValue({ value, run, reduced }: { value: string; run: boolean; reduced: boolean }) {
-  const [t, setT] = React.useState(0)
-  React.useEffect(() => {
-    if (!run) return
-    if (reduced) {
-      setT(1)
-      return
-    }
-    const t0 = performance.now()
-    let raf = 0
-    const tick = (now: number) => {
-      const k = Math.min(1, (now - t0) / 1600)
-      setT(k)
-      if (k < 1) raf = requestAnimationFrame(tick)
-    }
-    raf = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(raf)
-  }, [run, reduced])
-  return <>{formatStat(value, t)}</>
+  const enter = run && !reduced
+  return <span className={"nf-stat-n" + (enter ? " nf-stat-n-in" : "")}>{formatStat(value, 1)}</span>
 }
 
 /* -------------------------------------------------------------- demo dialog */
@@ -1497,15 +1512,18 @@ function DemoDialog({ steps, onClose, reduced }: { steps: InkDemoStep[]; onClose
     return () => cancelAnimationFrame(raf)
   }, [run, total, reduced])
   const done = elapsed >= total
+  // Cabecera sin cronómetro: la walkthrough es metodológica, no una ejecución
+  // cronometrada de un flujo automatizado.
+  const stepNo = Math.min(steps.length, Math.floor(elapsed / per) + 1)
   return (
     <div className="nf-modal" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
-      <div className="nf-dialog" role="dialog" aria-modal="true" aria-label="Demostración del producto">
+      <div className="nf-dialog" role="dialog" aria-modal="true" aria-label="Metodología de trabajo">
         <div className="nf-dialog-head">
           <span>
             <i className="nf-live" />
-            {done ? "ejecución completa · " + total.toFixed(1) + "s" : "flujo en marcha · " + elapsed.toFixed(1) + "s"}
+            {done ? "Metodología de entrega" : "Fase " + stepNo + " de " + steps.length}
           </span>
-          <button ref={closeRef} type="button" className="nf-icon-btn" onClick={onClose} aria-label="Cerrar demostración">
+          <button ref={closeRef} type="button" className="nf-icon-btn" onClick={onClose} aria-label="Cerrar metodología">
             <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
               <path d="M3 3l8 8M11 3l-8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
@@ -1521,16 +1539,16 @@ function DemoDialog({ steps, onClose, reduced }: { steps: InkDemoStep[]; onClose
                   <b>{s.label}</b>
                   <small>{s.detail}</small>
                 </span>
-                <span className="nf-step-t">{state === "done" ? per.toFixed(1) + "s" : state === "run" ? "…" : ""}</span>
+                <span className="nf-step-t">{state === "run" ? "…" : ""}</span>
               </li>
             )
           })}
         </ol>
         <div className="nf-bar">
-          <i style={{ width: (elapsed / total) * 100 + "%" }} />
+          <i style={{ width: (total > 0 ? elapsed / total : 1) * 100 + "%" }} />
         </div>
         <div className="nf-dialog-foot">
-          <span>{done ? "Ahorro de ~3 h 40 min de trabajo manual." : "Relájate: nada de esto necesita a una persona."}</span>
+          <span>Cada fase queda documentada y entregada.</span>
           <button type="button" className="nf-btn nf-btn-ghost" onClick={() => setRun((r) => r + 1)} disabled={!done}>
             Repetir
           </button>
@@ -1545,14 +1563,16 @@ function DemoDialog({ steps, onClose, reduced }: { steps: InkDemoStep[]; onClose
 export default function InkOrbitSaasTemplate({
   brand = "Innova-Tech",
   nav = D_NAV,
-  navCta = "Contáctanos",
+  navCta = "Contacto",
   hero,
   features,
   about,
   faq = D_FAQ,
   cta,
-  footerTagline = "La capa de automatización para equipos que prefieren pensar antes que copiar y pegar.",
-  footerColumns = D_FOOTER,
+  footerTagline = "El dominio de las tecnologías emergentes. Operando desde 1998.",
+  // Sin columnas por defecto: la plantilla traía enlaces inventados ("Empleo",
+  // "Blog", "Novedades", "Términos") apuntando a "#". Las reales va en content.ts.
+  footerColumns = [],
   demoSteps = D_STEPS,
   sculptureSeed = 7,
   onReforge,
@@ -1926,10 +1946,6 @@ export default function InkOrbitSaasTemplate({
             <div className="nf-foot-bar">
               <span>
                 © {year} {brand}. Todos los derechos reservados.
-              </span>
-              <span className="nf-status">
-                <i className="nf-live" />
-                Todos los sistemas operativos
               </span>
               <button type="button" className="nf-theme" onClick={toggleTheme} aria-label={"Cambiar al tema " + (theme === "dark" ? "claro" : "oscuro")}>
                 <ThemeIcon dark={theme === "dark"} />
