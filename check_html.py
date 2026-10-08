@@ -5,7 +5,7 @@ Un parser sin feed() tiene la pila vacia y siempre 'pasa': asi se colaron
 16 falsos OK. Ademas <meta ... /> dispara handle_startendtag, que por defecto
 llama a start+end, y como los voids no se apilan el endtag sale sobrante.
 """
-import glob, sys
+import glob, os, sys
 from html.parser import HTMLParser
 
 VOID = {'meta', 'link', 'br', 'hr', 'img', 'input', 'source', 'area',
@@ -54,5 +54,10 @@ def check(paths):
 
 
 if __name__ == '__main__':
-    root = sys.argv[1] if len(sys.argv) > 1 else '/tmp/opencode/sel'
-    sys.exit(1 if check(glob.glob(root + '/**/*.html', recursive=True)) else 0)
+    root = sys.argv[1] if len(sys.argv) > 1 else os.path.dirname(os.path.abspath(__file__))
+    files = glob.glob(root + '/**/*.html', recursive=True)
+    if not files:
+        # sin archivos no hay nada que validar: no puede pasar en silencio
+        print('  MAL  0 archivos HTML bajo %s' % root)
+        sys.exit(1)
+    sys.exit(1 if check(files) else 0)

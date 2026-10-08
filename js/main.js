@@ -38,19 +38,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    if ('IntersectionObserver' in window) {
-        var io = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    io.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.12 });
-        document.querySelectorAll('[data-reveal]').forEach(function (el) { io.observe(el); });
-    } else {
-        document.querySelectorAll('[data-reveal]').forEach(function (el) { el.classList.add('is-visible'); });
-    }
+    initReveal();
+    initScrollProgress();
 
     var params = new URLSearchParams(window.location.search);
     var interes = params.get('interes');
@@ -99,6 +88,7 @@ function drawConstellation() {
     var dots = [];
     var mouse = { x: -9999, y: -9999 };
     var COLORS = ['#22D3EE', '#8B5CF6', '#EC4899'];
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function resize() {
         canvas.width = canvas.offsetWidth;
@@ -163,10 +153,13 @@ function drawConstellation() {
             }
         }
 
-        requestAnimationFrame(step);
+        if (!reduced) requestAnimationFrame(step);
     }
 
-    window.addEventListener('resize', resize);
+    window.addEventListener('resize', function () {
+        resize();
+        if (reduced) step();
+    });
     canvas.addEventListener('mousemove', function (e) {
         var rect = canvas.getBoundingClientRect();
         mouse.x = e.clientX - rect.left;
@@ -176,6 +169,72 @@ function drawConstellation() {
 
     resize();
     step();
+}
+
+function initReveal() {
+    var reveals = document.querySelectorAll('[data-reveal]');
+    if (!reveals.length) return;
+
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!window.Motion || reduced) {
+        Array.prototype.forEach.call(reveals, function (el) { el.classList.add('is-visible'); });
+        return;
+    }
+
+    var animate = window.Motion.animate;
+    var inView = window.Motion.inView;
+    var EASE = [0.16, 1, 0.3, 1];
+
+    function show(el, delay) {
+        animate(el, { opacity: [0, 1], y: [26, 0] }, {
+            duration: 0.6,
+            delay: delay,
+            ease: EASE,
+            onComplete: function () { el.classList.add('is-visible'); }
+        });
+    }
+
+    // Se agrupa por padre directo (no por selector): hay varios .container en la
+    // pagina y mezclarlos en un solo grupo romperia el escalonado.
+    var groups = [];
+    Array.prototype.forEach.call(reveals, function (el) {
+        var parent = el.parentElement;
+        if (!parent) { show(el, 0); return; }
+        var g = null;
+        for (var i = 0; i < groups.length; i++) {
+            if (groups[i].parent === parent) { g = groups[i]; break; }
+        }
+        if (!g) { g = { parent: parent, els: [] }; groups.push(g); }
+        g.els.push(el);
+    });
+
+    groups.forEach(function (g) {
+        // Un bloque mas alto que la pantalla escalonaria casos que aun no se ven,
+        // que quedarian ya revelados al llegar: ahi cada hijo entra por su cuenta.
+        var stacked = g.parent.getBoundingClientRect().height > window.innerHeight * 1.15;
+
+        if (stacked || g.els.length === 1) {
+            g.els.forEach(function (el) {
+                inView(el, function () { show(el, 0); }, { amount: 0.15 });
+            });
+        } else {
+            inView(g.parent, function () {
+                g.els.forEach(function (el, i) { show(el, i * 0.075); });
+            }, { amount: 0.15 });
+        }
+    });
+}
+
+function initScrollProgress() {
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!window.Motion || reduced || !document.body) return;
+
+    var bar = document.createElement('div');
+    bar.className = 'scroll-progress';
+    bar.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(bar);
+
+    window.Motion.scroll(window.Motion.animate(bar, { scaleX: [0, 1] }, { ease: 'linear' }));
 }
 
 // Language selector dropdown
