@@ -190,11 +190,13 @@ function nearestIndex(xs: number[], x: number): number {
 /* the sculpture: ink loops + bridges, sampled to a fixed-size point cloud so
    any two seeds can morph grain-for-grain */
 type Cloud = { core: Float32Array; grain: Float32Array; spikes: Float32Array }
-/* global grain budget (1 = the original 18.800 points). Lower = cheaper per
+/* global point budget (1 = the original 18.800 points). Lower = cheaper per
    frame; keep the silhouette dense enough that the ink texture survives. */
 const SCULPTURE_DENSITY = 0.3
 const CORE_N = Math.round(2800 * SCULPTURE_DENSITY)
-const GRAIN_N = Math.round(16000 * SCULPTURE_DENSITY)
+/* loose dust dots around the tubes: removed (2026-10-08), they rendered as
+   isolated pixels on the cosmic palette */
+const GRAIN_N = 0
 const SPIKE_N = 16
 const SPHERE_R = 0.3
 
