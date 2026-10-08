@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 220" role="img" aria-labelledby="t">
+  <title id="t">Cumplimiento normativo del sector público</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0A0E1E"/>
+      <stop offset="1" stop-color="#0E162E"/>
+    </linearGradient>
+    <linearGradient id="acc" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FBBF24"/>
+      <stop offset="1" stop-color="#F59E0B"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FBBF24" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#FBBF24" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="220" fill="url(#bg)"/>
+  <g stroke="#8BA8E0" stroke-opacity="0.08">
+    <path d="M0 55H400M0 110H400M0 165H400M80 0V220M160 0V220M240 0V220M320 0V220"/>
+  </g>
+  <circle cx="200" cy="110" r="92" fill="url(#glow)"/>
+  <g stroke="#FBBF24" stroke-opacity="0.6" stroke-width="2">
+    <path d="M52 92l24-10 24 10"/>
+    <path d="M76 82v30"/>
+    <path d="M300 128l24 10 24-10"/>
+    <path d="M324 138v-30"/>
+  </g>
+  <g fill="#0E162E" stroke="url(#acc)" stroke-width="2">
+    <path d="M60 96l18-6 18 6v34H60z"/>
+    <path d="M304 132l18-6 18 6v24h-36z"/>
+  </g>
+  <g>
+    <rect x="158" y="52" width="84" height="84" rx="12" fill="#0E162E" stroke="url(#acc)" stroke-width="2"/>
+    <path d="M172 76h56M172 90h38M172 104h46" stroke="#FBBF24" stroke-width="2" stroke-linecap="round"/>
+    <path d="M222 92l-6 8 12 14" stroke="#34D399" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g stroke="#8BA8E0" stroke-opacity="0.5" stroke-width="2">
+    <line x1="200" y1="136" x2="200" y2="176"/>
+    <path d="M184 178h32"/>
+  </g>
+  <g fill="#FBBF24">
+    <circle cx="252" cy="86" r="4"/>
+    <circle cx="252" cy="104" r="4"/>
+    <circle cx="252" cy="122" r="4"/>
+  </g>
+</svg>

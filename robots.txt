@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://innova-tech.com.mx/sitemap.xml

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 220" role="img" aria-labelledby="t">
+  <title id="t">Red de agentes de IA privada</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0A0E1E"/>
+      <stop offset="1" stop-color="#0E162E"/>
+    </linearGradient>
+    <linearGradient id="acc" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#22D3EE" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#22D3EE" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="220" fill="url(#bg)"/>
+  <g stroke="#8BA8E0" stroke-opacity="0.08">
+    <path d="M0 55H400M0 110H400M0 165H400M80 0V220M160 0V220M240 0V220M320 0V220"/>
+  </g>
+  <circle cx="200" cy="110" r="92" fill="url(#glow)"/>
+  <g stroke="#22D3EE" stroke-opacity="0.35" stroke-width="1.5">
+    <line x1="80" y1="60" x2="150" y2="92"/>
+    <line x1="80" y1="60" x2="118" y2="158"/>
+    <line x1="118" y1="158" x2="252" y2="150"/>
+    <line x1="150" y1="92" x2="252" y2="72"/>
+    <line x1="150" y1="92" x2="252" y2="150"/>
+    <line x1="252" y1="72" x2="302" y2="100"/>
+    <line x1="252" y1="150" x2="302" y2="142"/>
+  </g>
+  <g fill="#0A0E1E" stroke="#22D3EE" stroke-width="2">
+    <circle cx="80" cy="60" r="8"/>
+    <circle cx="118" cy="158" r="8"/>
+    <circle cx="150" cy="92" r="8"/>
+    <circle cx="252" cy="72" r="8"/>
+    <circle cx="252" cy="150" r="8"/>
+    <circle cx="302" cy="100" r="8"/>
+    <circle cx="302" cy="142" r="8"/>
+  </g>
+  <g>
+    <rect x="168" y="78" width="64" height="64" rx="14" fill="#0E162E" stroke="url(#acc)" stroke-width="2"/>
+    <rect x="184" y="94" width="32" height="32" rx="6" fill="none" stroke="url(#acc)" stroke-width="2"/>
+    <path d="M196 100v22M205 100v22M187 108h18M187 117h18" stroke="#22D3EE" stroke-width="1.6"/>
+    <path d="M200 119l5-7h-10z" fill="#22D3EE"/>
+  </g>
+</svg>

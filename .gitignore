@@ -1,0 +1,17 @@
+# nunca subir credenciales ni respaldos
+*.bak
+*.bak-*
+.env
+.env.*
+*.pem
+id_rsa*
+id_ed25519*
+.git-credentials
+
+# arboles temporales de trabajo
+__pycache__/
+*.pyc
+node_modules/
+
+# sitio: kapp-portal es otra aplicacion con su propio vhost
+kappa-portal/
