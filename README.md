@@ -1,7 +1,8 @@
 # Innova-Tech — sitio corporativo
 
 Sitio estático en cuatro idiomas (`es/` es la raíz, más `en/`, `ru/` y `zh/`),
-sin build: HTML, CSS y JS se editan a mano.
+sin build: HTML, CSS y JS se editan a mano. **Única excepción:** la landing
+de `/landing/`, que sí se compila (ver abajo).
 
 ## Estructura
 
@@ -15,6 +16,8 @@ js/                   main, analytics, assistant, form-endpoint
 img/                  logotipos, hero y capturas de evidencia
 privacy/innova-tech/  aviso de privacidad en los 4 idiomas
 form.php              endpoint de los formularios (POST)
+landing-src/          fuente de la landing (Vite + React + TypeScript)
+landing/              salida compilada de la landing (se commitea)
 robots, sitemap
 ```
 
@@ -48,6 +51,33 @@ página completa. `js/capacitaciones.js` no existe: nada lo referencia.
 ## Verificación
 
 ```bash
-# HTML balanceado en las 16 páginas
+# HTML balanceado en todo el repo: 16 páginas + 4 avisos + landing/index.html
+# + landing-src/index.html (el globo **/*.html es recursivo)
 python3 check_html.py .
 ```
+
+## Landing `/landing/`
+
+Página aparte en `https://innova-tech.com.mx/landing/`, añadida **sin
+reemplazar** el sitio. `landing-src/` es un proyecto Vite + React + TypeScript
+(única dependencia runtime: React; sin Tailwind, el CSS propio vive en la
+constante `NF_CSS` de `src/InkOrbitLanding.tsx`).
+
+```bash
+cd landing-src
+npm run build    # tsc --noEmit && vite build && node scripts/prerender.mjs
+```
+
+Sale en `landing/` (`base: '/landing/'`, `outDir: '../landing'`): `index.html`
+con el HTML prerenderizado dentro de `<div id="root">`, `assets/index-<hash>.js`
+y `favicon.ico`. **El build cambia el hash del bundle**, así que hay que
+commitear `landing/` y redeplegar los tres archivos juntos.
+
+- Contenido: solo `landing-src/src/content.ts`. Regla: **ninguna cifra salvo
+  `1998` y `15`**; lo derivado va marcado `// PROPUESTA` y lo que no es dato
+  `// DECORATIVO`. Al final del archivo hay un bloque `ADVERTENCIAS` con las
+  fuentes.
+- Fuente de la plantilla: Ink Orbit de
+  `github.com/Kedhareswer/21stdev-my-components` (copiada del fuente público).
+- Despliegue por FTPS con `/root/innova-tech/work/ftputil.py` (fuera de este
+  repo; **no subirlo nunca**: contiene credenciales). Detalle en `DESIGN.md` §22.
