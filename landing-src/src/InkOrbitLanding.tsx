@@ -412,7 +412,7 @@ const D_STEPS: InkDemoStep[] = [
 /* ------------------------------------------------------------------ styles */
 
 const NF_CSS = `
-.nf-root{--nf-accent:#22D3EE;--nf-page:#EEF1FB;--nf-hatch:rgba(17,23,48,.05);--nf-paper:#F7F9FF;--nf-card:#EDF1FC;--nf-raise:#FDFEFF;--nf-ink:#0A0E1E;--nf-soft:#2A3352;--nf-muted:#4A5578;--nf-faint:#5F6B96;--nf-line:rgba(17,23,48,.13);--nf-line-strong:rgba(17,23,48,.26);--nf-bracket:#9AA8CC;--nf-band:#E4E9FA;--nf-inv:#111730;--nf-inv-ink:#E8EEFF;--nf-inv-muted:#9AA8CC;--nf-shadow:0 1px 2px rgba(10,14,30,.06),0 8px 24px -12px rgba(10,14,30,.18);--nf-sans:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--nf-display:"Space Grotesk","Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--nf-serif:"Newsreader","Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,"Times New Roman",serif;--nf-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;position:relative;width:100%;box-sizing:border-box;background-color:var(--nf-page);background-image:repeating-linear-gradient(135deg,var(--nf-hatch) 0 1px,transparent 1px 10px);color:var(--nf-ink);font-family:var(--nf-sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;padding:12px clamp(10px,2.4vw,28px) 28px;transition:background-color .45s ease,color .45s ease}
+.nf-root{--nf-accent:#22D3EE;--nf-z-nav:30;--nf-z-modal:200;--nf-page:#EEF1FB;--nf-hatch:rgba(17,23,48,.05);--nf-paper:#F7F9FF;--nf-card:#EDF1FC;--nf-raise:#FDFEFF;--nf-ink:#0A0E1E;--nf-soft:#2A3352;--nf-muted:#4A5578;--nf-faint:#5F6B96;--nf-line:rgba(17,23,48,.13);--nf-line-strong:rgba(17,23,48,.26);--nf-bracket:#9AA8CC;--nf-band:#E4E9FA;--nf-inv:#111730;--nf-inv-ink:#E8EEFF;--nf-inv-muted:#9AA8CC;--nf-shadow:0 1px 2px rgba(10,14,30,.06),0 8px 24px -12px rgba(10,14,30,.18);--nf-sans:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--nf-display:"Space Grotesk","Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--nf-serif:"Newsreader","Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,"Times New Roman",serif;--nf-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;position:relative;width:100%;box-sizing:border-box;background-color:var(--nf-page);background-image:repeating-linear-gradient(135deg,var(--nf-hatch) 0 1px,transparent 1px 10px);color:var(--nf-ink);font-family:var(--nf-sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;padding:12px clamp(10px,2.4vw,28px) 28px;transition:background-color .45s ease,color .45s ease}
 .nf-root[data-theme="dark"]{--nf-accent:#22D3EE;--nf-page:#05070F;--nf-hatch:rgba(139,168,224,.045);--nf-paper:#0A0E1E;--nf-card:#131B2E;--nf-raise:#1B2540;--nf-ink:#E8EEFF;--nf-soft:#C3CEEC;--nf-muted:#9AA8CC;--nf-faint:#7E8CBA;--nf-line:rgba(139,168,224,.14);--nf-line-strong:rgba(139,168,224,.32);--nf-bracket:rgba(139,168,224,.45);--nf-band:#111730;--nf-inv:#1B2540;--nf-inv-ink:#E8EEFF;--nf-inv-muted:#9AA8CC;--nf-shadow:0 1px 2px rgba(0,0,0,.45),0 14px 34px -18px rgba(0,0,0,.85)}
 .nf-root :where(*){box-sizing:border-box}
 .nf-root ::selection{background:var(--nf-accent);color:#05070F}
@@ -443,8 +443,8 @@ const NF_CSS = `
 .nf-frame-hover:hover>.nf-c-br{transform:translate(3px,3px)}
 
 /* nav */
-.nf-nav{position:sticky;top:10px;z-index:30}
-.nf-navbar{display:flex;align-items:center;gap:16px;height:58px;padding:0 14px 0 18px;background:color-mix(in srgb,var(--nf-paper) 86%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--nf-line);box-shadow:var(--nf-shadow);transition:background-color .45s,border-color .45s}
+.nf-nav{position:sticky;top:10px;z-index:var(--nf-z-nav)}
+.nf-navbar{display:flex;align-items:center;gap:16px;height:58px;padding:0 14px 0 18px;background:var(--nf-paper);border:1px solid var(--nf-line);box-shadow:var(--nf-shadow);transition:background-color .45s,border-color .45s}
 .nf-brand{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:15px;letter-spacing:-.01em;white-space:nowrap;font-family:var(--nf-display)}
 .nf-brand svg{transition:transform .6s cubic-bezier(.2,.8,.2,1)}
 .nf-brand:hover svg{transform:rotate(-180deg)}
@@ -470,8 +470,8 @@ const NF_CSS = `
 .nf-btn .nf-arr{transition:transform .25s cubic-bezier(.2,.8,.2,1)}
 .nf-btn:hover .nf-arr{transform:translateX(3px)}
 .nf-btn[disabled]{opacity:.6;cursor:default}
-.nf-root[data-theme="dark"] .nf-btn-dark{background:var(--nf-accent);color:#05070F;box-shadow:0 0 0 3px var(--nf-paper),0 0 0 4px color-mix(in srgb,var(--nf-accent) 55%,transparent),0 8px 22px -10px rgba(34,211,238,.55)}
-.nf-root[data-theme="dark"] .nf-btn-dark:hover{box-shadow:0 0 0 3px var(--nf-paper),0 0 0 4px var(--nf-ink),0 12px 26px -12px rgba(34,211,238,.75)}
+.nf-root[data-theme="dark"] .nf-btn-dark{background:var(--nf-accent);color:#05070F;box-shadow:0 0 0 3px var(--nf-paper),0 0 0 4px color-mix(in srgb,var(--nf-accent) 55%,transparent),0 8px 22px -10px rgba(0,0,0,.55)}
+.nf-root[data-theme="dark"] .nf-btn-dark:hover{box-shadow:0 0 0 3px var(--nf-paper),0 0 0 4px var(--nf-ink),0 12px 26px -12px rgba(0,0,0,.55)}
 
 /* sections */
 .nf-sec{position:relative;background:var(--nf-paper);border:1px solid var(--nf-line);scroll-margin-top:84px;transition:background-color .45s,border-color .45s}
@@ -570,12 +570,12 @@ const NF_CSS = `
 
 /* cta + footer */
 .nf-cta{position:relative;overflow:hidden;background:var(--nf-inv);color:var(--nf-inv-ink);border-color:var(--nf-inv);text-align:center}
-.nf-cta::after{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,#22D3EE,#8B5CF6,#EC4899)}
+.nf-cta::after{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,var(--nf-accent),transparent)}
 .nf-cta-grid{position:absolute;inset:0;background-image:linear-gradient(color-mix(in srgb,var(--nf-inv-ink) 7%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--nf-inv-ink) 7%,transparent) 1px,transparent 1px);background-size:36px 36px;-webkit-mask-image:radial-gradient(60% 70% at 50% 50%,#000,transparent);mask-image:radial-gradient(60% 70% at 50% 50%,#000,transparent);pointer-events:none}
 .nf-cta .nf-h2 .nf-muted{color:var(--nf-inv-muted);font-family:var(--nf-serif);font-style:italic}
 .nf-cta p{color:var(--nf-inv-muted);margin-top:12px}
 .nf-cta-actions{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;margin-top:28px}
-.nf-cta .nf-btn{height:44px;padding:0 24px;background:var(--nf-accent);color:#05070F;box-shadow:0 14px 32px -14px rgba(34,211,238,.85)}
+.nf-cta .nf-btn{height:44px;padding:0 24px;background:var(--nf-accent);color:#05070F;box-shadow:0 14px 32px -14px rgba(0,0,0,.6)}
 .nf-cta .nf-btn:hover{transform:translateY(-1px)}
 .nf-spin{width:14px;height:14px;border-radius:99px;border:2px solid currentColor;border-right-color:transparent;animation:nf-spin .7s linear infinite}
 .nf-foot{display:grid;grid-template-columns:minmax(0,1fr);gap:28px;padding:clamp(28px,4cqw,44px) clamp(16px,4cqw,48px) 22px}
@@ -587,12 +587,12 @@ const NF_CSS = `
 .nf-foot-tag{font-size:13px;color:var(--nf-muted);margin-top:12px;max-width:34ch;line-height:1.6}
 .nf-foot-bar{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding-top:18px;border-top:1px solid var(--nf-line);font-size:12px;color:var(--nf-muted)}
 .nf-status{display:inline-flex;align-items:center;gap:7px}
-.nf-live{width:7px;height:7px;border-radius:99px;background:var(--nf-accent-live,#22c55e);box-shadow:0 0 0 0 var(--nf-accent-live,#22c55e);animation:nf-ping 2.4s ease-out infinite}
+.nf-live{width:7px;height:7px;border-radius:99px;background:var(--nf-accent)}
 .nf-theme{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid var(--nf-line);transition:border-color .2s,color .2s}
 .nf-theme:hover{border-color:var(--nf-ink);color:var(--nf-ink)}
 
 /* demo dialog */
-.nf-modal{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;padding:16px;background:rgba(10,10,10,.42);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:nf-fade .25s ease both}
+.nf-modal{position:fixed;inset:0;z-index:var(--nf-z-modal);display:grid;place-items:center;padding:16px;background:rgba(5,7,15,.72);animation:nf-fade .25s ease both}
 .nf-dialog{position:relative;width:min(560px,100%);max-height:calc(100vh - 32px);overflow:auto;background:var(--nf-paper);color:var(--nf-ink);border:1px solid var(--nf-line-strong);box-shadow:0 30px 80px -20px rgba(0,0,0,.45);animation:nf-pop .4s cubic-bezier(.2,.8,.2,1) both;font-family:var(--nf-sans)}
 .nf-dialog-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--nf-line);font-size:13px}
 .nf-dialog-head span{display:inline-flex;align-items:center;gap:8px;font-family:var(--nf-mono);font-size:11.5px;color:var(--nf-muted)}
@@ -620,7 +620,6 @@ const NF_CSS = `
 @keyframes nf-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(1.35)}}
 @keyframes nf-sheet-in{from{opacity:0;transform:translate(14px,-10px) rotate(4deg)}to{opacity:1;transform:none}}
 @keyframes nf-spin{to{transform:rotate(360deg)}}
-@keyframes nf-ping{0%{box-shadow:0 0 0 0 rgba(34,197,94,.55)}80%,100%{box-shadow:0 0 0 7px rgba(34,197,94,0)}}
 
 @media (prefers-reduced-motion:reduce){
 .nf-root *,.nf-modal *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
@@ -1263,7 +1262,7 @@ function FlowCard({ brand, features, uid, reduced, inView }: { brand: string; fe
                   </g>
                   <circle cx="11" cy="11" r="10.5" fill="none" stroke="var(--nf-paper)" strokeWidth="1.5" />
                 </svg>
-                <circle cx={m.x + 8} cy={m.y + 8} r="2.6" fill={i === 4 ? "var(--nf-faint)" : "#22c55e"} stroke="var(--nf-paper)" className={i === 4 ? undefined : "nf-presence"} />
+                <circle cx={m.x + 8} cy={m.y + 8} r="2.6" fill={i === 4 ? "var(--nf-faint)" : "var(--nf-accent)"} stroke="var(--nf-paper)" className={i === 4 ? undefined : "nf-presence"} />
                 <g className="nf-av-tip" transform={"translate(" + m.x + "," + (m.y - 18) + ")"}>
                   <rect x={-m.name.length * 2.45 - 6} y="-9" width={m.name.length * 4.9 + 12} height="14" rx="2" fill="var(--nf-inv)" />
                   <text x="0" y="1" textAnchor="middle" fontSize="7.5" fill="var(--nf-inv-ink)" fontFamily="var(--nf-sans)">
