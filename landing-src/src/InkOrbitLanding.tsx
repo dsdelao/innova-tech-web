@@ -146,6 +146,17 @@ function mixHex(a: string, b: string, t: number): string {
   return "rgb(" + A.map((v, i) => Math.round(v + (B[i] - v) * k)).join(",") + ")"
 }
 
+// "rgb(r,g,b)" / "#rrggbb" / "#rgb" -> "rgba(r,g,b,a)"
+function rgba(c: string, a: number): string {
+  const h = (c.startsWith("#") ? c.slice(1) : "")
+  if (h.length === 6 || h.length === 3) {
+    const parts = h.length === 6 ? [h.slice(0, 2), h.slice(2, 4), h.slice(4, 6)] : h.split("").map((x) => x + x)
+    return "rgba(" + parts.map((p) => parseInt(p, 16)).join(",") + "," + a.toFixed(3) + ")"
+  }
+  const mm = (c.match(/\d+/g) || []).slice(0, 3)
+  return "rgba(" + mm.join(",") + "," + a.toFixed(3) + ")"
+}
+
 // Smooth line + closed area through values, inside a w×h box.
 function chartPaths(values: number[], w: number, h: number, pad: number) {
   const n = values.length
@@ -812,7 +823,7 @@ function ToolGlyph({ index }: { index: number }) {
 
 /* ------------------------------------------------------------- sculpture */
 
-type ArtColors = { ink: string; bg: string }
+type ArtColors = { ink: string; bg: string; accent: string; violet: string; magenta: string }
 
 function InkSculpture({
   seed,
@@ -920,7 +931,7 @@ function InkSculpture({
       if (!moving && !s.dirty) return
       s.dirty = false
 
-      const { ink, bg } = s.colors
+      const { ink, bg, accent, violet, magenta } = s.colors
       ctx.setTransform(1, 0, 0, 1, 0, 0)
       ctx.clearRect(0, 0, W, H)
       const cx = W / 2
@@ -934,13 +945,32 @@ function InkSculpture({
       const B = s.to
       const mixP = (arrB: Float32Array, arrA: Float32Array | undefined, i: number) => (arrA && m < 1 ? arrA[i] + (arrB[i] - arrA[i]) * m : arrB[i])
 
+      // additive light reads differently on light canvases, so budgets shrink there
+      const bgl = (() => {
+        const mm = bg.match(/\d+/g)
+        if (!mm) return 0
+        const f2 = (x: number) => {
+          x /= 255
+          return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4)
+        }
+        return 0.2126 * f2(+mm[0]) + 0.7152 * f2(+mm[1]) + 0.0722 * f2(+mm[2])
+      })()
+      const glowMul = bgl > 0.5 ? 0.5 : 1
+
+      // cosmic ramp: deep cyan at the back, white-hot at the front
+      const bins: { c: string; g: string }[] = []
+      for (let b = 0; b < NB; b++) {
+        const deep = mixHex(accent, bg, 0.16 + 0.7 * (1 - b / (NB - 1)))
+        bins.push({ c: b >= 3 ? mixHex(deep, "#FFFFFF", (b - 3) / 3.4) : deep, g: mixHex(deep, bg, 0.22) })
+      }
+
       // crosshair behind everything
       const reach = scale * 1.38
       const grad = (x1: number, y1: number, x2: number, y2: number) => {
         const g = ctx.createLinearGradient(x1, y1, x2, y2)
-        g.addColorStop(0, mixHex(ink, bg, 1))
-        g.addColorStop(0.5, mixHex(ink, bg, 0.35))
-        g.addColorStop(1, mixHex(ink, bg, 1))
+        g.addColorStop(0, rgba(accent, 0))
+        g.addColorStop(0.5, rgba(accent, 0.5 * glowMul))
+        g.addColorStop(1, rgba(accent, 0))
         return g
       }
       ctx.lineWidth = Math.max(1, dpr)
@@ -954,6 +984,22 @@ function InkSculpture({
       ctx.moveTo(cx - reach, cy)
       ctx.lineTo(cx + reach, cy)
       ctx.stroke()
+
+      // nebula haze behind the object (additive)
+      if (!s.reduced) {
+        ctx.globalCompositeOperation = "lighter"
+        const neb = (dx: number, dy: number, r: number, col: string, a: number) => {
+          const g = ctx.createRadialGradient(cx + dx, cy + dy, 0, cx + dx, cy + dy, r)
+          g.addColorStop(0, rgba(col, a * glowMul))
+          g.addColorStop(1, rgba(col, 0))
+          ctx.fillStyle = g
+          ctx.fillRect(cx - reach, cy - reach, reach * 2, reach * 2)
+        }
+        neb(-reach * 0.2, -reach * 0.12, reach * 1.05, accent, 0.13)
+        neb(reach * 0.24, -reach * 0.08, reach * 0.85, violet, 0.08)
+        neb(reach * 0.02, reach * 0.22, reach * 0.72, magenta, 0.06)
+        ctx.globalCompositeOperation = "source-over"
+      }
 
       // project — yaw/pitch trig is hoisted out of the point loops (the same
       // math as project(), just not recomputing 4 cos/sin per grain)
@@ -1011,10 +1057,10 @@ function InkSculpture({
         py[i] = cy + y2 * sc * scale
         bin[i] = clamp(Math.floor(((z2 + 1.25) / 2.5) * NB), 0, NB - 1)
       }
-      const gs = Math.max(1, 1.15 * dpr)
       const pass = (b: number) => {
-        const fade = 0.62 * (1 - b / (NB - 1))
-        ctx.fillStyle = mixHex(ink, bg, fade)
+        const gs = Math.max(1, (b >= 4 ? 1.55 : 1.2) * dpr)
+        const c = bins[b]
+        ctx.fillStyle = c.c
         ctx.beginPath()
         let drew = false
         for (let i = 0; i < CORE_N; i++) {
@@ -1024,7 +1070,7 @@ function InkSculpture({
           ctx.arc(px[i], py[i], pr[i], 0, Math.PI * 2)
         }
         if (drew) ctx.fill()
-        ctx.fillStyle = mixHex(ink, bg, Math.min(0.85, fade + 0.12))
+        ctx.fillStyle = c.g
         for (let i = CORE_N; i < CORE_N + GRAIN_N; i++) if (bin[i] === b) ctx.fillRect(px[i], py[i], gs, gs)
       }
       const spikes = (front: boolean) => {
@@ -1035,8 +1081,8 @@ function InkSculpture({
           const e = project(mixP(B.spikes, A?.spikes, o + 3), mixP(B.spikes, A?.spikes, o + 4), mixP(B.spikes, A?.spikes, o + 5), yaw, pitch, f)
           if (a[2] >= 0 !== front) continue
           const g = ctx.createLinearGradient(cx + a[0] * scale, cy + a[1] * scale, cx + e[0] * scale, cy + e[1] * scale)
-          g.addColorStop(0, mixHex(ink, bg, front ? 0.1 : 0.5))
-          g.addColorStop(1, mixHex(ink, bg, 1))
+          g.addColorStop(0, front ? mixHex(accent, bg, 0.12) : mixHex(accent, bg, 0.4))
+          g.addColorStop(1, mixHex(accent, bg, 1))
           ctx.strokeStyle = g
           ctx.beginPath()
           ctx.moveTo(cx + a[0] * scale, cy + a[1] * scale)
@@ -1080,19 +1126,19 @@ function InkSculpture({
       const rim = ctx.createRadialGradient(cx - rs * 0.25, cy - rs * 0.3, rs * 0.1, cx, cy, rs)
       rim.addColorStop(0, "rgba(255,255,255,.55)")
       rim.addColorStop(0.55, "rgba(255,255,255,.12)")
-      rim.addColorStop(0.86, mixHex(ink, bg, 0.82).replace("rgb", "rgba").replace(")", ",.25)"))
-      rim.addColorStop(1, mixHex(ink, bg, 0.3).replace("rgb", "rgba").replace(")", ",.7)"))
+      rim.addColorStop(0.86, rgba(mixHex(accent, bg, 0.72), 0.3))
+      rim.addColorStop(1, rgba(mixHex(accent, bg, 0.3), 0.75))
       ctx.fillStyle = rim
       ctx.fillRect(cx - rs, cy - rs, rs * 2, rs * 2)
       // inner rings + the seed-flower at the core
-      ctx.strokeStyle = mixHex(ink, bg, 0.6)
+      ctx.strokeStyle = mixHex(accent, bg, 0.4)
       ctx.lineWidth = Math.max(0.6, 0.7 * dpr)
       for (let r = 1; r <= 3; r++) {
         ctx.beginPath()
         ctx.ellipse(cx, cy, rs * (0.28 + r * 0.17), rs * (0.12 + r * 0.08), yaw * 0.6 + r, 0, Math.PI * 2)
         ctx.stroke()
       }
-      ctx.strokeStyle = mixHex(ink, bg, 0.15)
+      ctx.strokeStyle = mixHex(accent, bg, 0.08)
       const petals = 6
       for (let k = 0; k < petals; k++) {
         const a = (k / petals) * Math.PI * 2 + yaw * 0.9
@@ -1115,14 +1161,46 @@ function InkSculpture({
       ctx.fillStyle = hl
       ctx.fillRect(cx - rs, cy - rs, rs * 2, rs * 2)
       ctx.restore()
-      ctx.strokeStyle = mixHex(ink, bg, 0.45)
+      ctx.strokeStyle = mixHex(accent, bg, 0.45)
       ctx.lineWidth = Math.max(1, dpr)
       ctx.beginPath()
       ctx.arc(cx, cy, rs, 0, Math.PI * 2)
       ctx.stroke()
 
+      // energy bloom across the glass core (additive, softly pulsing)
+      ctx.globalCompositeOperation = "lighter"
+      const pulse = s.reduced ? 1 : 1 + 0.05 * Math.sin(now * 0.0017)
+      const br = rs * 2.35 * pulse
+      const cb = ctx.createRadialGradient(cx, cy, rs * 0.12, cx, cy, br)
+      cb.addColorStop(0, rgba(accent, 0.34 * glowMul))
+      cb.addColorStop(0.42, rgba(violet, 0.13 * glowMul))
+      cb.addColorStop(1, rgba(accent, 0))
+      ctx.fillStyle = cb
+      ctx.fillRect(cx - br, cy - br, br * 2, br * 2)
+      const wb = ctx.createRadialGradient(cx, cy, 0, cx, cy, rs * 0.95)
+      wb.addColorStop(0, rgba("#FFFFFF", 0.42 * glowMul))
+      wb.addColorStop(1, rgba("#FFFFFF", 0))
+      ctx.fillStyle = wb
+      ctx.fillRect(cx - br, cy - br, br * 2, br * 2)
+      ctx.globalCompositeOperation = "source-over"
+
       for (let b = Math.floor(NB / 2) + 1; b < NB; b++) pass(b)
       spikes(true)
+
+      // light-catching sparks on the near face (deterministic, additive)
+      ctx.globalCompositeOperation = "lighter"
+      for (let k = 0; k < 56; k++) {
+        const i = (k * 23167) % CORE_N
+        if (bin[i] < 4) continue
+        const t = k % 10
+        const col = t < 5 ? mixHex(accent, "#FFFFFF", 0.55) : t < 8 ? violet : magenta
+        const tw = s.reduced ? 1 : 0.5 + 0.5 * Math.sin(now * 0.0034 + k * 1.9)
+        ctx.fillStyle = rgba(col, 0.3 + 0.22 * tw)
+        ctx.beginPath()
+        ctx.arc(px[i], py[i], Math.max(1.3, pr[i] * (0.9 + 0.55 * tw)), 0, Math.PI * 2)
+        ctx.fill()
+      }
+      ctx.globalCompositeOperation = "source-over"
     }
     raf = requestAnimationFrame(draw)
     return () => {
@@ -1699,7 +1777,10 @@ export default function InkOrbitSaasTemplate({
   }
   const [demo, setDemo] = React.useState(false)
   const closeDemo = React.useCallback(() => setDemo(false), [])
-  const artColors: ArtColors = theme === "dark" ? { ink: "#E8EEFF", bg: "#0A0E1E" } : { ink: "#10162E", bg: "#F7F9FF" }
+  const artColors: ArtColors =
+    theme === "dark"
+      ? { ink: "#E8EEFF", bg: "#0A0E1E", accent: "#22D3EE", violet: "#8B5CF6", magenta: "#EC4899" }
+      : { ink: "#10162E", bg: "#F7F9FF", accent: "#0891B2", violet: "#7C3AED", magenta: "#DB2777" }
 
   /* reveals */
   const [featRef, featIn] = useInView(0.12)
