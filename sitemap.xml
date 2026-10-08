@@ -64,4 +64,8 @@
     <loc>https://innova-tech.com.mx/zh//contacto.html</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://innova-tech.com.mx/contacto.html"/> <xhtml:link rel="alternate" hreflang="en" href="https://innova-tech.com.mx/en/contacto.html"/> <xhtml:link rel="alternate" hreflang="ru" href="https://innova-tech.com.mx/ru/contacto.html"/> <xhtml:link rel="alternate" hreflang="zh" href="https://innova-tech.com.mx/zh/contacto.html"/>
   </url>
+  <url>
+    <loc>https://innova-tech.com.mx/landing/</loc>
+    <lastmod>2026-10-07</lastmod>
+  </url>
 </urlset>

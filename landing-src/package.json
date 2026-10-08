@@ -1,0 +1,22 @@
+{
+  "name": "innova-tech-landing",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build && node scripts/prerender.mjs",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@vitejs/plugin-react": "^4",
+    "typescript": "^5",
+    "vite": "^5"
+  }
+}

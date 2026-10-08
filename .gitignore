@@ -15,3 +15,6 @@ node_modules/
 
 # sitio: kapp-portal es otra aplicacion con su propio vhost
 kappa-portal/
+
+landing-src/node_modules/
+landing-src/dist/
