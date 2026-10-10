@@ -28,6 +28,7 @@ export const landingProps: InkOrbitSaasTemplateProps = {
     { label: "Servicios", target: "features" },
     { label: "Capacitaciones", target: "capacitaciones.html" },
     { label: "Cursos Online", target: "cursos.html" },
+    { label: "Proyectos", target: "proyectos.html" },
   ],
 
   /* ----------------------------------------------------------------- navCta */
@@ -228,6 +229,7 @@ export const landingProps: InkOrbitSaasTemplateProps = {
         // Páginas reales del sitio (relativas: la landing vive en la raíz).
         { label: "Capacitaciones", href: "capacitaciones.html" },
         { label: "Cursos Online", href: "cursos.html" },
+        { label: "Proyectos", href: "proyectos.html" },
         { label: "Contacto", href: "contacto.html" },
       ],
     },

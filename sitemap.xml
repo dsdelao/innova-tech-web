@@ -64,4 +64,20 @@
     <loc>https://innova-tech.com.mx/zh/contacto.html</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://innova-tech.com.mx/contacto.html"/> <xhtml:link rel="alternate" hreflang="en" href="https://innova-tech.com.mx/en/contacto.html"/> <xhtml:link rel="alternate" hreflang="ru" href="https://innova-tech.com.mx/ru/contacto.html"/> <xhtml:link rel="alternate" hreflang="zh" href="https://innova-tech.com.mx/zh/contacto.html"/>
   </url>
+  <url>
+    <loc>https://innova-tech.com.mx/proyectos.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://innova-tech.com.mx/proyectos.html"/> <xhtml:link rel="alternate" hreflang="en" href="https://innova-tech.com.mx/en/proyectos.html"/> <xhtml:link rel="alternate" hreflang="ru" href="https://innova-tech.com.mx/ru/proyectos.html"/> <xhtml:link rel="alternate" hreflang="zh" href="https://innova-tech.com.mx/zh/proyectos.html"/>
+  </url>
+  <url>
+    <loc>https://innova-tech.com.mx/en/proyectos.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://innova-tech.com.mx/proyectos.html"/> <xhtml:link rel="alternate" hreflang="en" href="https://innova-tech.com.mx/en/proyectos.html"/> <xhtml:link rel="alternate" hreflang="ru" href="https://innova-tech.com.mx/ru/proyectos.html"/> <xhtml:link rel="alternate" hreflang="zh" href="https://innova-tech.com.mx/zh/proyectos.html"/>
+  </url>
+  <url>
+    <loc>https://innova-tech.com.mx/ru/proyectos.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://innova-tech.com.mx/proyectos.html"/> <xhtml:link rel="alternate" hreflang="en" href="https://innova-tech.com.mx/en/proyectos.html"/> <xhtml:link rel="alternate" hreflang="ru" href="https://innova-tech.com.mx/ru/proyectos.html"/> <xhtml:link rel="alternate" hreflang="zh" href="https://innova-tech.com.mx/zh/proyectos.html"/>
+  </url>
+  <url>
+    <loc>https://innova-tech.com.mx/zh/proyectos.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://innova-tech.com.mx/proyectos.html"/> <xhtml:link rel="alternate" hreflang="en" href="https://innova-tech.com.mx/en/proyectos.html"/> <xhtml:link rel="alternate" hreflang="ru" href="https://innova-tech.com.mx/ru/proyectos.html"/> <xhtml:link rel="alternate" hreflang="zh" href="https://innova-tech.com.mx/zh/proyectos.html"/>
+  </url>
 </urlset>
