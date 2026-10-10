@@ -40,8 +40,8 @@ export const landingProps: InkOrbitSaasTemplateProps = {
 
   /* ------------------------------------------------------------------ hero */
   hero: {
-    // Titular literal de la portada (h1 de index.html).
-    titleTop: "De la tecnología emergente a su ventaja operativa",
+    // Alineado al H1 vigente de index.html (mecanismo: construimos Y operamos).
+    titleTop: "Software, soporte y consultoría que no se detienen en la entrega",
     // Línea serif rotativa: títulos literales de dominios de servicio
     // (DOM-01…DOM-03), frases cortas sin inventar.
     titleAccent: [
@@ -49,12 +49,12 @@ export const landingProps: InkOrbitSaasTemplateProps = {
       "Ciberseguridad de Defensa",
       "Infraestructura Crítica",
     ],
-    // Subtítulo literal de la portada.
+    // Alineado al subtítulo vigente de la portada.
     description:
-      "La convertimos en sistemas que operan todos los días. Construimos, desplegamos y damos mantenimiento.",
+      "No entregamos y desaparecemos: desplegamos, operamos y damos soporte a los sistemas que sostienen su operación todos los días.",
     // Literal del sitio: el CTA primario de la portada apunta a Calendly
     // (ver onStartTrial más abajo).
-    primaryCta: "Agendar diagnóstico",
+    primaryCta: "Agenda tu diagnóstico gratis",
     // Literal del secundario de la portada ("Ver cómo trabajamos ↓"),
     // sin la flecha decorativa. Abre el diálogo de metodología.
     secondaryCta: "Ver cómo trabajamos",
@@ -115,9 +115,10 @@ export const landingProps: InkOrbitSaasTemplateProps = {
     tag: "Cómo trabajamos", // literal del navbar del sitio (#manifiesto)
     // Literal del manifiesto (tarjeta 03).
     title: "Convertimos promesa en\n*operación.*",
-    // Los tres puntos del manifiesto, literales y en su orden de aparición.
+    // Reescrito para reflejar el mecanismo vigente (construimos Y operamos);
+    // antes aludía a "tecnologías emergentes" (marca vieja).
     body:
-      "Exploramos antes que el mercado: Evaluamos tecnologías emergentes con rigor metodológico y científico, no con entusiasmo de marketing. Probamos bajo presión: Cada solución se valida en los entornos más exigentes: alta seguridad, misión crítica, cero margen de error. Convertimos promesa en operación: Lo que otros llaman proyecto de innovación, nosotros lo entregamos como servicio garantizado y documentado.",
+      "Exploramos antes de proponer. Evaluamos su operación y la tecnología disponible con rigor metodológico, no con entusiasmo de marketing. Probamos bajo presión. Cada solución se valida en los entornos más exigentes: alta seguridad, misión crítica, cero margen de error. Y nos quedamos operando. Lo que otros entregan como un proyecto, nosotros lo sostenemos como servicio operado, documentado y con soporte.",
     // SOLO cifras verificables (telemetría de portada y JSON-LD).
     // Sin "Toda la República Mexicana": no encaja como cifra en la rejilla.
     stats: [
@@ -175,12 +176,13 @@ export const landingProps: InkOrbitSaasTemplateProps = {
 
   /* -------------------------------------------------------------------- cta */
   cta: {
-    // Literal de la banda final de index.html (#contacto).
-    title: "¿Listo para *cruzar la frontera?*",
+    // Literal de la banda final de index.html (#contacto), alineado al
+    // CTA vigente del sitio.
+    title: "Cuéntanos qué te está *fallando.*",
     // Literal de la banda final de index.html (ya no hay formulario aquí;
     // el componente pone un único botón con href a contacto.html).
     description:
-      "El primer paso es una conversación. Agende una consulta estratégica sin costo y permítanos entender su desafío.",
+      "Te respondemos con una propuesta clara y sin compromiso. Sin costo y sin letras chiquitas.",
     // Literal del botón primario de esa banda.
     button: "Contacto",
   },
@@ -192,7 +194,7 @@ export const landingProps: InkOrbitSaasTemplateProps = {
     {
       label: "Exploramos",
       detail:
-        "Evaluamos tecnologías emergentes con rigor metodológico y científico, no con entusiasmo de marketing.",
+        "Evaluamos su operación y la tecnología disponible con rigor metodológico, no con entusiasmo de marketing.",
     },
     {
       label: "Probamos",
@@ -206,13 +208,13 @@ export const landingProps: InkOrbitSaasTemplateProps = {
     {
       label: "Convertimos",
       detail:
-        "Lo que otros llaman proyecto de innovación, nosotros lo entregamos como servicio garantizado y documentado.",
+        "Lo que otros entregan como proyecto, nosotros lo sostenemos como servicio operado y documentado.",
     },
   ],
 
   /* ----------------------------------------------------------------- footer */
-  // Literal del bloque de marca del footer real de index.html.
-  footerTagline: "El dominio de las tecnologías emergentes. Operando desde 1998.",
+  // Alineado al bloque de marca del footer vigente de index.html.
+  footerTagline: "Construimos, operamos y damos soporte a la tecnología de nuestros clientes. Desde 1998.",
 
   footerColumns: [
     {

@@ -348,11 +348,11 @@ const D_NAV: InkNavLink[] = [
 // SLA, tiempos de configuración y testimonios están prohibidos. Los arrays
 // sin datos verificables se dejan vacíos (about.stats, faq, footerColumns).
 const D_HERO: InkHero = {
-  titleTop: "De la tecnología emergente a su ventaja operativa",
+  titleTop: "Software, soporte y consultoría que no se detienen en la entrega",
   titleAccent: ["Inteligencia Artificial Privada", "Ciberseguridad de Defensa", "Infraestructura Crítica"],
   description:
-    "La convertimos en sistemas que operan todos los días. Construimos, desplegamos y damos mantenimiento.",
-  primaryCta: "Agendar diagnóstico",
+    "No entregamos y desaparecemos: desplegamos, operamos y damos soporte a los sistemas que sostienen su operación todos los días.",
+  primaryCta: "Agenda tu diagnóstico gratis",
   secondaryCta: "Ver cómo trabajamos",
   sculptureHint: "Arrastra para girar · Haz clic para recrear",
 }
@@ -392,16 +392,16 @@ const D_ABOUT: InkAbout = {
   tag: "Cómo trabajamos",
   title: "Convertimos promesa en\n*operación.*",
   body:
-    "Exploramos antes que el mercado: Evaluamos tecnologías emergentes con rigor metodológico y científico, no con entusiasmo de marketing. Probamos bajo presión: Cada solución se valida en los entornos más exigentes: alta seguridad, misión crítica, cero margen de error. Convertimos promesa en operación: Lo que otros llaman proyecto de innovación, nosotros lo entregamos como servicio garantizado y documentado.",
+    "Exploramos antes de proponer. Evaluamos su operación y la tecnología disponible con rigor metodológico, no con entusiasmo de marketing. Probamos bajo presión. Cada solución se valida en los entornos más exigentes: alta seguridad, misión crítica, cero margen de error. Y nos quedamos operando. Lo que otros entregan como un proyecto, nosotros lo sostenemos como servicio operado, documentado y con soporte.",
   // Vacío: no hay cifras verificadas más allá de 1998/15 (viven en content.ts).
   stats: [],
 }
 // Vacío: sin FAQ de plantilla (la FAQ real vive en content.ts).
 const D_FAQ: InkFaq[] = []
 const D_CTA: InkCta = {
-  title: "¿Listo para *cruzar la frontera?*",
+  title: "Cuéntanos qué te está *fallando.*",
   description:
-    "El primer paso es una conversación. Agende una consulta estratégica sin costo y permítanos entender su desafío.",
+    "Te respondemos con una propuesta clara y sin compromiso. Sin costo y sin letras chiquitas.",
   button: "Contacto",
 }
 // Pasos del diálogo: fases derivadas del manifiesto real (mismos textos que
@@ -409,7 +409,7 @@ const D_CTA: InkCta = {
 const D_STEPS: InkDemoStep[] = [
   {
     label: "Exploramos",
-    detail: "Evaluamos tecnologías emergentes con rigor metodológico y científico, no con entusiasmo de marketing.",
+    detail: "Evaluamos su operación y la tecnología disponible con rigor metodológico, no con entusiasmo de marketing.",
   },
   {
     label: "Probamos",
@@ -418,7 +418,7 @@ const D_STEPS: InkDemoStep[] = [
   { label: "Desplegamos", detail: "Construimos, desplegamos y damos mantenimiento." },
   {
     label: "Convertimos",
-    detail: "Lo que otros llaman proyecto de innovación, nosotros lo entregamos como servicio garantizado y documentado.",
+    detail: "Lo que otros entregan como proyecto, nosotros lo sostenemos como servicio operado y documentado.",
   },
 ]
 
@@ -1648,7 +1648,7 @@ export default function InkOrbitSaasTemplate({
   about,
   faq = D_FAQ,
   cta,
-  footerTagline = "El dominio de las tecnologías emergentes. Operando desde 1998.",
+  footerTagline = "Construimos, operamos y damos soporte a la tecnología de nuestros clientes. Desde 1998.",
   // Sin columnas por defecto: la plantilla traía enlaces inventados ("Empleo",
   // "Blog", "Novedades", "Términos") apuntando a "#". Las reales va en content.ts.
   footerColumns = [],
