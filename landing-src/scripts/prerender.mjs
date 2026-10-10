@@ -9,7 +9,9 @@ import { createServer } from "vite"
 
 const here = path.dirname(fileURLToPath(import.meta.url))
 const root = path.resolve(here, "..") // landing-src/
-const outFile = path.resolve(root, "..", "landing", "index.html")
+// Por defecto ../landing/index.html; LANDING_OUTFILE permite otro destino
+// (p. ej. ../.landing-root/index.html cuando se compila con base=/).
+const outFile = path.resolve(root, process.env.LANDING_OUTFILE || "../landing/index.html")
 const MARKER = '<div id="root"></div>'
 
 // renderToString escapa <, > y & en los hijos de texto. Eso es correcto en

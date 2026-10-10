@@ -1,0 +1,426 @@
+/* ============================================================
+   INK ORBIT — capa de tema para el sitio estático
+   Re-skin sobre css/style.css: adopta el lenguaje visual de
+   /landing/ (papel + trama diagonal, esquinas de 2px, paneles
+   con hairline, botón de anillo, acento serif Newsreader).
+   MODO CLARO (espejo del tema claro de la landing).
+   No cambia la estructura del DOM ni el copy.
+   ============================================================ */
+
+:root {
+    /* Tokens Ink Orbit — tema CLARO (espejo de .nf-root sin [data-theme]) */
+    --nf-accent: #22D3EE;
+    --nf-accent-ink: #0E7490;      /* acento legible sobre claro (texto) */
+    --nf-page: #EEF1FB;
+    --nf-hatch: rgba(17, 23, 48, 0.05);
+    --nf-paper: #F7F9FF;
+    --nf-card: #EDF1FC;
+    --nf-raise: #FDFEFF;
+    --nf-ink: #0A0E1E;
+    --nf-soft: #2A3352;
+    --nf-muted: #4A5578;
+    --nf-faint: #5F6B96;
+    --nf-line: rgba(17, 23, 48, 0.13);
+    --nf-line-strong: rgba(17, 23, 48, 0.26);
+    --nf-bracket: #9AA8CC;
+    --nf-band: #E4E9FA;
+    --nf-inv: #111730;
+    --nf-inv-ink: #E8EEFF;
+    --nf-inv-muted: #9AA8CC;
+    --nf-shadow: 0 1px 2px rgba(10, 14, 30, 0.06), 0 8px 24px -12px rgba(10, 14, 30, 0.18);
+    --font-serif: 'Newsreader', 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, 'Times New Roman', serif;
+
+    /* Esquinas: Ink Orbit es de esquinas rectas (2px) salvo los puntos */
+    --r-1: 2px;
+    --r-2: 2px;
+    --r-3: 2px;
+    --r-4: 2px;
+
+    /* Redefinir los tokens base de style.css a claro */
+    --space-0: #EEF1FB;
+    --space-1: #F7F9FF;
+    --space-2: #E4E9FA;
+    --ink: #0A0E1E;
+    --ink-dim: #4A5578;
+    --surface: #EDF1FC;
+    --surface-raised: #FDFEFF;
+    --line: rgba(17, 23, 48, 0.13);
+}
+
+/* ---------- Página: trama diagonal clara ---------- */
+body {
+    background-color: var(--nf-page);
+    background-image: repeating-linear-gradient(135deg, var(--nf-hatch) 0 1px, transparent 1px 10px);
+    background-attachment: fixed;
+    color: var(--nf-ink);
+    font-size: 15px;
+}
+
+.section,
+.hero,
+.page-hero {
+    scroll-margin-top: 84px;
+}
+
+/* ============================================================
+   NAVEGACIÓN — barra-panel flotante
+   ============================================================ */
+.header { top: 10px; }
+.header.scrolled {
+    background: transparent;
+    border-bottom-color: transparent;
+}
+
+.navbar {
+    height: 58px;
+    padding: 0 14px 0 18px;
+    background: var(--nf-paper);
+    border: 1px solid var(--nf-line);
+    box-shadow: var(--nf-shadow);
+    border-radius: 2px;
+}
+
+.navbar__menu a:not(.btn) { color: var(--nf-soft); font-size: 13.5px; }
+.navbar__menu a:not(.btn):hover { color: var(--nf-ink); }
+.navbar__actions { border-left-color: var(--nf-line); }
+
+/* ============================================================
+   BOTONES — 2px; primario = tinta oscura con anillo (landing claro)
+   ============================================================ */
+.btn {
+    border-radius: 2px;
+    font-weight: 500;
+    font-size: 13.5px;
+    line-height: 1;
+    padding: 10px 16px;
+}
+
+.btn--primary {
+    background: var(--nf-inv);
+    color: var(--nf-inv-ink);
+    box-shadow:
+        0 0 0 3px var(--nf-paper),
+        0 0 0 4px var(--nf-line-strong),
+        0 6px 16px -8px rgba(0, 0, 0, 0.35);
+}
+.btn--primary:hover {
+    box-shadow:
+        0 0 0 3px var(--nf-paper),
+        0 0 0 4px var(--nf-ink),
+        0 10px 22px -10px rgba(0, 0, 0, 0.4);
+    transform: translateY(-1px);
+}
+
+.btn--ghost {
+    background: var(--nf-raise);
+    color: var(--nf-ink);
+    border: 1px solid var(--nf-line-strong);
+}
+.btn--ghost:hover { border-color: var(--nf-ink); color: var(--nf-ink); }
+
+/* ============================================================
+   PANELES — cada sección es un panel de papel sobre la trama
+   ============================================================ */
+.section { padding: 0 0 14px; background: transparent; }
+.section--alt { background: transparent; }
+
+.section > .container,
+.page-hero > .container {
+    background: var(--nf-paper);
+    border: 1px solid var(--nf-line);
+    border-radius: 2px;
+    padding: clamp(40px, 5.5vw, 72px) clamp(16px, 3.2vw, 48px);
+}
+
+.section__header { margin-bottom: 2.6rem; }
+.section__header h2,
+.cta-box h2 {
+    font-weight: 500;
+    letter-spacing: -0.025em;
+}
+
+/* Páginas internas (capacitaciones, cursos, contacto): page-hero como panel */
+.page-hero {
+    padding: 96px 0 14px;
+    background: transparent;
+}
+.page-hero h1 { font-weight: 500; }
+
+/* ============================================================
+   HERO — panel (solo si se conserva; la home pasa a la landing)
+   ============================================================ */
+.hero {
+    min-height: auto;
+    padding: 96px 0 14px;
+}
+.hero > .container {
+    background: var(--nf-paper);
+    border: 1px solid var(--nf-line);
+    border-radius: 2px;
+    padding: clamp(40px, 5.5vw, 80px) clamp(16px, 3.2vw, 48px);
+}
+.hero__title { font-weight: 400; }
+.hero__scroll { display: none; }
+
+/* Acento serif (nf-h1-acc): hero del home y page-hero de internas */
+.gradient-text {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    color: var(--nf-soft);
+}
+
+/* Telemetría como rejilla de hairline (nf-stats) */
+.hero__telemetry {
+    display: grid;
+    gap: 1px;
+    background: var(--nf-line);
+    border: 1px solid var(--nf-line);
+    border-radius: 2px;
+}
+.telemetry {
+    border: 0;
+    border-radius: 0;
+    background: var(--nf-paper);
+    padding: 18px 16px;
+}
+.telemetry__value {
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    font-variant-numeric: tabular-nums;
+    font-size: clamp(26px, 3.2vw, 34px);
+    color: var(--nf-ink);
+}
+.telemetry__label { font-size: 12px; letter-spacing: 0.02em; color: var(--nf-muted); }
+
+/* ============================================================
+   TARJETAS — degradado raise→card, hairline, corchetes al hover
+   ============================================================ */
+.manifiesto-card,
+.dominio-card,
+.expedicion-card,
+.senal-card,
+.caso,
+.proyecto-card,
+.route-card,
+.course-card,
+.step-card,
+.instructor-card,
+.ai-demo,
+.assistant-chat,
+.contact-form-wrap,
+.contact-side,
+.cap-stat {
+    background: linear-gradient(180deg, var(--nf-raise), var(--nf-card));
+    border: 1px solid var(--nf-line);
+    border-radius: 2px;
+}
+
+.manifiesto-card:hover,
+.dominio-card:hover,
+.expedicion-card:hover,
+.senal-card:hover,
+.caso:hover,
+.proyecto-card:hover,
+.route-card:hover,
+.course-card:hover,
+.step-card:hover,
+.instructor-card:hover {
+    border-color: var(--nf-line-strong);
+    box-shadow: var(--nf-shadow);
+    transform: none;
+}
+
+/* Corchetes de esquina (signature Ink Orbit), visibles al hover */
+.manifiesto-card,
+.dominio-card,
+.expedicion-card,
+.senal-card,
+.caso,
+.proyecto-card,
+.route-card,
+.course-card,
+.step-card,
+.instructor-card,
+.telemetry,
+.ai-demo {
+    position: relative;
+}
+.manifiesto-card::before,
+.dominio-card::before,
+.expedicion-card::before,
+.senal-card::before,
+.caso::before,
+.proyecto-card::before,
+.route-card::before,
+.course-card::before,
+.step-card::before,
+.instructor-card::before,
+.telemetry::before,
+.ai-demo::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background-image:
+        linear-gradient(var(--nf-bracket), var(--nf-bracket)), linear-gradient(var(--nf-bracket), var(--nf-bracket)),
+        linear-gradient(var(--nf-bracket), var(--nf-bracket)), linear-gradient(var(--nf-bracket), var(--nf-bracket)),
+        linear-gradient(var(--nf-bracket), var(--nf-bracket)), linear-gradient(var(--nf-bracket), var(--nf-bracket)),
+        linear-gradient(var(--nf-bracket), var(--nf-bracket)), linear-gradient(var(--nf-bracket), var(--nf-bracket));
+    background-repeat: no-repeat;
+    background-size: 12px 1.5px, 1.5px 12px, 12px 1.5px, 1.5px 12px, 12px 1.5px, 1.5px 12px, 12px 1.5px, 1.5px 12px;
+    background-position:
+        left top, left top,
+        right top, right top,
+        left bottom, left bottom,
+        right bottom, right bottom;
+}
+.manifiesto-card:hover::before,
+.dominio-card:hover::before,
+.expedicion-card:hover::before,
+.senal-card:hover::before,
+.caso:hover::before,
+.proyecto-card:hover::before,
+.route-card:hover::before,
+.course-card:hover::before,
+.step-card:hover::before,
+.instructor-card:hover::before,
+.telemetry:hover::before,
+.ai-demo:hover::before {
+    opacity: 1;
+}
+
+/* Etiquetas "//" como chips de catálogo */
+.dominio-card__tag,
+.expedicion-card__tag,
+.caso__tag,
+.proyecto-card__tag,
+.route-card__tag,
+.course-card__tag {
+    display: inline-block;
+    align-self: flex-start;
+    padding: 4px 10px;
+    font-size: 11.5px;
+    letter-spacing: 0.02em;
+    color: var(--nf-soft);
+    background: var(--nf-card);
+    border: 1px solid var(--nf-line);
+    border-radius: 2px;
+    margin-bottom: 0.9rem;
+}
+
+/* ============================================================
+   ESTADÍSTICAS — rejilla de hairline
+   ============================================================ */
+.cap-stats {
+    gap: 1px;
+    background: var(--nf-line);
+    border: 1px solid var(--nf-line);
+    border-radius: 2px;
+}
+.cap-stat {
+    border: 0;
+    border-radius: 0;
+    background: var(--nf-paper);
+}
+
+/* ============================================================
+   CTA — panel invertido (tinta oscura) con filete y rejilla
+   ============================================================ */
+.section--cta { background: transparent; }
+.section--cta > .container {
+    position: relative;
+    overflow: hidden;
+    background: var(--nf-inv);
+    border-color: var(--nf-inv);
+}
+.section--cta > .container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(232, 238, 255, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232, 238, 255, 0.07) 1px, transparent 1px);
+    background-size: 36px 36px;
+    -webkit-mask-image: radial-gradient(60% 70% at 50% 50%, #000, transparent);
+    mask-image: radial-gradient(60% 70% at 50% 50%, #000, transparent);
+}
+.section--cta > .container::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--nf-accent), transparent);
+}
+.section--cta .cta-box {
+    position: relative;
+    z-index: 1;
+    border-left: 0;
+    padding: 0;
+}
+.section--cta h2 { color: var(--nf-inv-ink); }
+.section--cta .cta-box p { color: var(--nf-inv-muted); }
+
+/* ============================================================
+   FOOTER — panel
+   ============================================================ */
+.footer {
+    background: transparent;
+    border-top: 0;
+    padding: 0 0 14px;
+}
+.footer > .container {
+    background: var(--nf-paper);
+    border: 1px solid var(--nf-line);
+    border-radius: 2px;
+    padding: clamp(28px, 4vw, 44px) clamp(16px, 3.2vw, 48px) 22px;
+}
+
+/* ============================================================
+   Contraste del acento sobre claro: texto usa --nf-accent-ink
+   ============================================================ */
+.eyebrow,
+.footer__col h4,
+.route-card__tag,
+.course-card__tag,
+.ai-demo__label,
+.proyecto-card__tag,
+.dominio-card__link,
+.senal-card__link,
+.caso__link,
+.caso__valida,
+.proyecto-card__link,
+.instructor-card__role {
+    color: var(--nf-accent-ink);
+}
+.footer__col a:hover { color: var(--nf-accent-ink); }
+.footer__legal a:hover { color: var(--nf-accent-ink); }
+.dominio-card__link:hover,
+.senal-card__link:hover,
+.caso__link:hover,
+.proyecto-card__link:hover { text-decoration: underline; }
+
+/* Enlaces de sección y flechas en cyan claro: legibles */
+.route-card li::before { color: var(--nf-accent-ink); }
+.caso__par--resultado dd { border-left-color: var(--nf-accent-ink); }
+
+/* Barra de progreso: sin violeta/magenta; un solo hue (acento) */
+.scroll-progress {
+    background: linear-gradient(90deg, var(--nf-accent-ink), transparent);
+}
+
+/* Mensajes de formulario: pasteles oscurecidos para claro */
+.form-status.err { color: #B91C1C; border-color: rgba(185, 28, 28, 0.35); background: rgba(185, 28, 28, 0.06); }
+.form-status.ok { color: #047857; border-color: rgba(4, 120, 87, 0.35); background: rgba(4, 120, 87, 0.06); }
+
+/* ============================================================
+   Esquinas rectas en controles secundarios
+   ============================================================ */
+.lang-toggle,
+.course-card__meta li {
+    border-radius: 2px;
+}

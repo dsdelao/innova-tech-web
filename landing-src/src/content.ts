@@ -26,10 +26,8 @@ export const landingProps: InkOrbitSaasTemplateProps = {
   nav: [
     { label: "Cómo trabajamos", target: "about" },
     { label: "Servicios", target: "features" },
-    { label: "Casos reales", target: SITE + "/#expediciones" },
-    { label: "Proyectos", target: SITE + "/#laboratorio" },
-    { label: "Capacitaciones", target: SITE + "/capacitaciones.html" },
-    { label: "Cursos Online", target: SITE + "/cursos.html" },
+    { label: "Capacitaciones", target: "capacitaciones.html" },
+    { label: "Cursos Online", target: "cursos.html" },
   ],
 
   /* ----------------------------------------------------------------- navCta */
@@ -223,13 +221,10 @@ export const landingProps: InkOrbitSaasTemplateProps = {
         // Secciones que existen en esta landing -> anclas internas.
         { label: "Cómo trabajamos", href: "#about" },
         { label: "Servicios", href: "#features" },
-        // Secciones que sólo existen en el sitio principal -> URL absoluta.
-        { label: "Casos reales", href: SITE + "/#expediciones" },
-        { label: "Proyectos", href: SITE + "/#laboratorio" },
-        { label: "Capacitaciones", href: SITE + "/capacitaciones.html" },
-        { label: "Cursos Online", href: SITE + "/cursos.html" },
-        { label: "Perspectiva", href: SITE + "/#senales" },
-        { label: "Contacto", href: CONTACT_URL },
+        // Páginas reales del sitio (relativas: la landing vive en la raíz).
+        { label: "Capacitaciones", href: "capacitaciones.html" },
+        { label: "Cursos Online", href: "cursos.html" },
+        { label: "Contacto", href: "contacto.html" },
       ],
     },
     {
