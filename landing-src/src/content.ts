@@ -61,6 +61,10 @@ export const landingProps: InkOrbitSaasTemplateProps = {
   // El componente fija href=CONTACT_URL en el CTA primario salvo que se
   // pase handler; aquí se redirige al Calendly real del sitio.
   onStartTrial: () => {
+    const track = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag
+    if (typeof track === "function") {
+      track("event", "agendar_diagnostico", { event_category: "cta", event_label: "hero" })
+    }
     window.open(CALENDLY_URL, "_blank", "noopener,noreferrer")
   },
 
