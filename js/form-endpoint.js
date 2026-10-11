@@ -90,6 +90,9 @@
             .then(function (j) {
                 if (j && j.ok) {
                     estado(st, 'ok', j.msg);
+                    if (typeof window.gtag === 'function') {
+                        try { window.gtag('event', 'generate_lead', { form: origen }); } catch (e) { /* noop */ }
+                    }
                     form.reset();
                     if (alOk) alOk();
                 } else {
