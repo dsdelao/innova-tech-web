@@ -826,6 +826,7 @@ ul { list-style: none; }
     border-radius: var(--r-4);
     background: var(--surface);
     padding: 2.2rem;
+    min-width: 0;
 }
 .contact-form-wrap h2, .contact-side h2 {
     font-family: var(--font-display);
@@ -851,6 +852,8 @@ ul { list-style: none; }
 .form-field input,
 .form-field select,
 .form-field textarea {
+    width: 100%;
+    max-width: 100%;
     font-family: var(--font-body);
     font-size: 0.98rem;
     color: var(--ink);
