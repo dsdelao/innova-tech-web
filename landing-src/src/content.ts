@@ -50,7 +50,7 @@ export const landingProps: InkOrbitSaasTemplateProps = {
     ],
     // Alineado al subtítulo vigente de la portada.
     description:
-      "No entregamos y desaparecemos: desplegamos, operamos y damos soporte a los sistemas que sostienen su operación todos los días.",
+      "No entregamos y desaparecemos: desplegamos, operamos y damos soporte a los sistemas que sostienen tu operación todos los días.",
     // Literal del sitio: el CTA primario de la portada apunta a Calendly
     // (ver onStartTrial más abajo).
     primaryCta: "Agenda tu diagnóstico gratis",
@@ -83,20 +83,20 @@ export const landingProps: InkOrbitSaasTemplateProps = {
     collaboration: {
       title: "Inteligencia Artificial Privada",
       description:
-        "IA desplegada dentro de su perímetro: sus datos no salen de sus servidores. Modelos, agentes y automatización con control total.",
+        "IA desplegada dentro de tu perímetro: tus datos no salen de tus servidores. Modelos, agentes y automatización con control total.",
     },
     // DOM-02 // DEFENSA
     reports: {
       title: "Ciberseguridad de Defensa",
       description:
-        "Protección en profundidad, monitoreo permanente y respuesta ante incidentes. Su información es el activo que blindamos.",
+        "Protección en profundidad, monitoreo permanente y respuesta ante incidentes. Tu información es el activo que blindamos.",
     },
     // DOM-04 // AUTOMATIZACIÓN — los 4 tiles son productos/proyectos
     // reales del sitio.
     integrations: {
       title: "Software y Automatización",
       description:
-        "Herramientas a la medida que convierten procesos manuales en sistemas que trabajan mientras usted duerme.",
+        "Herramientas a la medida que convierten procesos manuales en sistemas que trabajan mientras duermes.",
       // La tarjeta dibuja exactamente 4 tiles ("4 conectadas" hardcodeado).
       tools: ["Open WebUI", "Arch-Credential", "FerrePOS", "Jarvis"],
     },
@@ -121,7 +121,7 @@ export const landingProps: InkOrbitSaasTemplateProps = {
     // Reescrito para reflejar el mecanismo vigente (construimos Y operamos);
     // antes aludía a "tecnologías emergentes" (marca vieja).
     body:
-      "Exploramos antes de proponer. Evaluamos su operación y la tecnología disponible con rigor metodológico, no con entusiasmo de marketing. Probamos bajo presión. Cada solución se valida en los entornos más exigentes: alta seguridad, misión crítica, cero margen de error. Y nos quedamos operando. Lo que otros entregan como un proyecto, nosotros lo sostenemos como servicio operado, documentado y con soporte.",
+      "Exploramos antes de proponer. Evaluamos tu operación y la tecnología disponible con rigor metodológico, no con entusiasmo de marketing. Probamos bajo presión. Cada solución se valida en los entornos más exigentes: alta seguridad, misión crítica, cero margen de error. Y nos quedamos operando. Lo que otros entregan como un proyecto, nosotros lo sostenemos como servicio operado, documentado y con soporte.",
     // SOLO cifras verificables (telemetría de portada y JSON-LD).
     // Sin "Toda la República Mexicana": no encaja como cifra en la rejilla.
     stats: [
@@ -137,12 +137,12 @@ export const landingProps: InkOrbitSaasTemplateProps = {
     {
       question: "¿Cómo funcionan las capacitaciones?",
       answer:
-        "Elegimos el formato según su equipo: online en vivo, presencial o a medida. Cada programa arranca con un micro-workshop de 30 minutos sin costo para evaluar necesidades.",
+        "Elegimos el formato según tu equipo: online en vivo, presencial o a medida. Cada programa arranca con un micro-workshop sin costo para evaluar necesidades.",
     },
     {
       question: "¿Emiten constancia o certificado?",
       answer:
-        "Sí. Cada participante recibe una constancia con la marca Innova-Tech, con validez interna para su organización.",
+        "Sí. Cada participante recibe una constancia con la marca Innova-Tech, con validez interna para tu organización.",
     },
     {
       question: "¿Capacitan a equipos del sector público?",
@@ -153,9 +153,9 @@ export const landingProps: InkOrbitSaasTemplateProps = {
     // --- PROPUESTA: preguntas derivadas (no citadas como FAQ en el sitio) ---
     // PROPUESTA — respuesta: literal DOM-01 + intervención literal del CASO-03.
     {
-      question: "¿Qué significa que la IA esté desplegada dentro de su perímetro?",
+      question: "¿Qué significa que la IA esté desplegada dentro de tu perímetro?",
       answer:
-        "IA desplegada dentro de su perímetro: sus datos no salen de sus servidores. Modelos, agentes y automatización con control total. Desplegamos Open WebUI en infraestructura propia, con modelos y datos bajo control del cliente.",
+        "IA desplegada dentro de tu perímetro: tus datos no salen de tus servidores. Modelos, agentes y automatización con control total. Desplegamos Open WebUI en infraestructura propia, con modelos y datos bajo control del cliente.",
     },
     // PROPUESTA — respuesta: literales de telemetría de portada.
     {
@@ -197,7 +197,7 @@ export const landingProps: InkOrbitSaasTemplateProps = {
     {
       label: "Exploramos",
       detail:
-        "Evaluamos su operación y la tecnología disponible con rigor metodológico, no con entusiasmo de marketing.",
+        "Evaluamos tu operación y la tecnología disponible con rigor metodológico, no con entusiasmo de marketing.",
     },
     {
       label: "Probamos",
@@ -248,7 +248,7 @@ export const landingProps: InkOrbitSaasTemplateProps = {
     {
       title: "Contacto", // literal (grupo "Contacto" del footer real)
       links: [
-        { label: "Escríbanos por el formulario", href: CONTACT_URL },
+        { label: "Escríbenos por el formulario", href: CONTACT_URL },
         { label: "admin@innova-tech.com.mx", href: "mailto:admin@innova-tech.com.mx" },
         { label: "Agendar diagnóstico", href: CALENDLY_URL },
         // Ruta verificada en el sitio real (footer -> Aviso de privacidad).
